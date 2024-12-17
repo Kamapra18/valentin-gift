@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentin Gift</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="falling-hearts"></div>
+
+        <div class="heart">
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+        </div>
+        <h1>
+            i love you 
+        </h1>
+        <button onclick="showMessageAndPlayMusic()">Click Me</button>
+        <p id="hiddenMessage" style="display: none;">You are my everything! ❤️</p>
+        <audio id="loveMusic">
+            <source src="RAN - Dekat di Hati (Official Music Video).mp3" type="audio/mp3"> 
+        </audio>
+    </div>
+    <script>
+        function showMessageAndPlayMusic() {
+            // Tampilkan pesan tersembunyi
+            document.getElementById('hiddenMessage').style.display = 'block';
+
+            // Mulai memutar musik dari menit tertentu
+            const music = document.getElementById('loveMusic');
+            const startTime = 90; // Mulai dari 1 menit 30 detik
+            const endTime = 165;  // Berakhir di 2 menit 45 detik
+
+            music.currentTime = startTime;
+            music.play();
+
+            // Hentikan musik saat mencapai waktu akhir
+            const stopMusic = () => {
+                if (music.currentTime >= endTime) {
+                    music.pause();
+                    music.removeEventListener('timeupdate', stopMusic); // Hapus event listener agar tidak terus berjalan
+                }
+            };
+
+            music.addEventListener('timeupdate', stopMusic);
+        }
+    </script>
+</body>
+</html>
